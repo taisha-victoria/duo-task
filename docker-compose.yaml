@@ -1,20 +1,15 @@
 version: "3.8"
 services:
-  chaperoo-client:
-    image: jordangrindrod/chaperoo-client
+    duo-task:
+    image: duo-db
     build: .
     ports:
       - target: 80
         published: 80
     depends_on:
       - chaperoo-service    
-  chaperoo-service: 
-    image: jordangrindrod/chaperoo-service
-    environment:
-      - DB_PASSWORD=${DB_PASSWORD}
-    depends_on: 
-      - chaperoo-db
-  chaperoo-db:
-    image: jordangrindrod/chaperoo-db
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+  duo-nginx: 
+    image: nginx:alpine
+    
+  depends on:
+  - flask-app
